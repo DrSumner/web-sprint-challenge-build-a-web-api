@@ -1,6 +1,7 @@
 // Write your "projects" router here!
 const express= require('express')
 const projects = require('./projects-model')
+const {validateProjectId} = require('./projects-middleware')
 
 const router = express.Router();
 
@@ -18,17 +19,8 @@ router.get('/', (req,res) => {
 })
 
 // GET  A PROJECT
-router.get('/:id', (req,res) => {
-    const {id} = req.params
-    projects.get(id)
-.then( pro => res.json(pro))
-.catch(err => res.status(500).json(
-    {
-        message:'error getting projects',
-     err: err.message,
-     stack: err.stack,
-    }
-))
+router.get('/:id', validateProjectId, (req,res) => {
+  res.json(req.pro)
 })
 
 module.exports = router;
