@@ -14,7 +14,6 @@ Pull your server into this file and start it!
 */
 
 const server = require('./api/server')
-const actionRouter = require('./api/actions/actions-router')
 const port = process.env.PORT || 9000
 
 
