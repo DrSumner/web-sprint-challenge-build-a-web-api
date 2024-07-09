@@ -6,7 +6,7 @@ module.exports = {
 };
 
 function intToBoolean(int) {
-  return int === 1 ? true : false;
+  return int === 1 || int === true ? true : false;
 }
 
 function booleanToint(bool) {
