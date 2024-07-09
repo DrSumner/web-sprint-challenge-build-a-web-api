@@ -12,7 +12,7 @@ function logger(req, res, next) {
   function validateProjectId(req, res, next) {
     projects.get(req.params.id)
     .then(pro => {
-      if(pro){
+      if(pro && Object.keys(pro).length > 0){
         req.pro = pro
         next() }
       else
@@ -26,10 +26,19 @@ function logger(req, res, next) {
       stack: err.stack,
       })
     })
-   
-  }
+}
+    function validateBody(req,res,next) {
+       const project = req.body
+
+       if(!project.name || !project.description){
+        res.status(400).json({message: 'please provide name & description'})
+       } else{ req.project = project; next()}
+       
+    }
+  
 
   module.exports = {
     logger,
     validateProjectId,
+    validateBody,
   }
